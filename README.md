@@ -1,6 +1,6 @@
-# Everylog Ruby Client
+# EveryLog Ruby Client
 
-A fantastic (and simple) gem to be able to interact with the Everylog API
+A fantastic (and simple) gem to interact with the EveryLog API
 
 ## Installation
 
@@ -23,9 +23,9 @@ Or install it yourself as:
 require 'everylog_ruby_client'
 
 # @param [Hash] options
-# @option options [String] :api_key for authenticate against Everylog server
+# @option options [String] :api_key for authenticate against EveryLog server
 # @option options [String] :everylog_url (https://api.everylog.io/api/v1/log-entries) to reach Everlog server
-$EverylogClient = Everylog::Client.instance.setup(api_key: <YOUR_API_KEY>)
+$EveryLogClient = EveryLog::Client.instance.setup(api_key: <YOUR_API_KEY>)
 
 # @param [Hash] options
 # @option options [String]  :projectId name of the project
@@ -35,7 +35,7 @@ $EverylogClient = Everylog::Client.instance.setup(api_key: <YOUR_API_KEY>)
 # @option options [Array]   :tags it can be used to categorize the notification, must be strings
 # @option options [String]  :link it can be used to display on the application and if enabled in the notification
 # @option options [Boolean] :push if True, a push notification is sent to application
-$EverylogClient.notify(...)
+$EveryLogClient.notify(...)
 ```
 ## Contributing
 
@@ -47,4 +47,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the EverylogWrapper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/everylogsaas/everylog_ruby_client/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the EveryLog ruby client project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/everylogsaas/everylog_ruby_client/blob/master/CODE_OF_CONDUCT.md).

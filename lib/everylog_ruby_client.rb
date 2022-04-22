@@ -4,7 +4,7 @@ require "uri"
 require "net/http"
 require "json"
 
-module Everylog
+module EveryLog
   class Client
     include ::Singleton
 
