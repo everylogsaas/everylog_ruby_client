@@ -10,14 +10,14 @@ module EveryLog
 
     SETUP_DEFAULTS = {
       api_key: nil,
+      projectId: nil,
       everylog_url: "https://api.everylog.io/api/v1/log-entries"
     }.freeze
 
     NOTIFY_DEFAULTS = {
-      projectId: nil,
-      title: nil,
-      summary: nil,
-      body: nil,
+      title: "Empty notification",
+      summary: "Empty summary",
+      body: "Empty body",
       tags: [],
       link: "",
       push: false
@@ -27,20 +27,22 @@ module EveryLog
 
     # @param [Hash] options
     # @option options [String] :api_key for authenticate against Everylog server
+    # @option options [String] :projectId name of the project
     # @option options [String] :everylog_url (https://api.everylog.io/api/v1/log-entries) to reach Everlog server
     def setup(options = {})
       @options = _parse_options(options, SETUP_DEFAULTS)
       self
     end
 
-    # @param [Hash] options
-    # @option options [String]  :projectId name of the project
-    # @option options [String]  :title to display in the application and if enabled in the notification
-    # @option options [String]  :summary is a not so long text to display on the application and if enabled in the notification
-    # @option options [String]  :body it can contain a long text simple formatted, no html to display in the application
-    # @option options [Array]   :tags it can be used to categorize the notification, must be strings
-    # @option options [String]  :link it can be used to display on the application and if enabled in the notification
-    # @option options [Boolean] :push if True, a push notification is sent to application
+    # @param [Hash] notify_options
+    # @option notify_options [String, options[:projectId]]  :projectId name of the project
+    # @option notify_options [String]  :title to display in the application and if enabled in the notification
+    # @option notify_options [String]  :summary is a not so long text to display on the application and if enabled in the notification
+    # @option notify_options [String]  :body it can contain a long text simple formatted, no html to display in the application
+    # @option notify_options [Array]   :tags it can be used to categorize the notification, must be strings
+    # @option notify_options [String]  :link it can be used to display on the application and if enabled in the notification
+    # @option notify_options [Boolean] :push if True, a push notification is sent to application
+
     def notify(notify_options = {})
       @notify_options = _parse_options(notify_options, NOTIFY_DEFAULTS)
       uri = URI(options[:everylog_url])
@@ -48,7 +50,8 @@ module EveryLog
                                   "Content-Type": "application/json",
                                   "Authorization": "Bearer #{options[:api_key]}"
                                 })
-      req.body = @notify_options.to_json
+      merged_options = { projectId: options[:projectId] }.merge(@notify_options)
+      req.body = merged_options.to_json
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(req)
       end
@@ -72,5 +75,5 @@ module EveryLog
 
       result_parsed_options
     end
-  end  
+  end
 end

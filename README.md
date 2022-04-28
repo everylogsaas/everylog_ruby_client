@@ -24,11 +24,12 @@ require 'everylog_ruby_client'
 
 # @param [Hash] options
 # @option options [String] :api_key for authenticate against EveryLog server
+# @option options [String] :projectId name of the project
 # @option options [String] :everylog_url (https://api.everylog.io/api/v1/log-entries) to reach Everlog server
-$EveryLogClient = EveryLog::Client.instance.setup(api_key: <YOUR_API_KEY>)
+$EveryLogClient = EveryLog::Client.instance.setup(api_key: <YOUR_API_KEY>, projectId: <YOUR_PROJECT_NAME>)
 
 # @param [Hash] options
-# @option options [String]  :projectId name of the project
+# @option notify_options [String, options[:projectId]]  :projectId name of the project
 # @option options [String]  :title to display in the application and if enabled in the notification
 # @option options [String]  :summary is a not so long text to display on the application and if enabled in the notification
 # @option options [String]  :body it can contain a long text simple formatted, no html to display in the application
