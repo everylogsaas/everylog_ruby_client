@@ -45,16 +45,13 @@ module EveryLog
 
     def notify(notify_options = {})
       @notify_options = _parse_options(notify_options, NOTIFY_DEFAULTS)
-      uri = URI(options[:everylog_url])
-      req = Net::HTTP::Post.new(uri, {
-                                  "Content-Type": "application/json",
-                                  "Authorization": "Bearer #{options[:api_key]}"
-                                })
-      merged_options = { projectId: options[:projectId] }.merge(@notify_options)
-      req.body = merged_options.to_json
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-        http.request(req)
-      end
+      merged_options  = { projectId: options[:projectId] }.merge(@notify_options)
+      uri             = URI(options[:everylog_url])
+      http            = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl    = true
+      req             = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json', "Authorization": "Bearer #{options[:api_key]}")
+      req.body        = merged_options.to_json
+      res             = http.request(req)
       res.body
     end
 
