@@ -20,7 +20,11 @@ module EveryLog
       body: "Empty body",
       tags: [],
       link: "",
-      push: false
+      push: false,
+      icon: "",
+      externalChannels: [],
+      properties: {},
+      groups: [],
     }.freeze
 
     attr_reader :options
