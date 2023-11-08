@@ -26,17 +26,17 @@ require 'everylog_ruby_client'
 # @option options [String] :api_key for authenticate against EveryLog server
 # @option options [String] :projectId name of the project
 # @option options [String] :everylog_url (https://api.everylog.io/api/v1/log-entries) to reach Everlog server
-$EveryLogClient = EveryLog::Client.instance.setup(api_key: <YOUR_API_KEY>, projectId: <YOUR_PROJECT_NAME>)
+$everylog_client = EverylogRubyClient.instance.setup(api_key: <YOUR_API_KEY>, projectId: <YOUR_PROJECT_NAME>)
 
-# @param [Hash] notify_options
-# @option notify_options [String, options[:projectId]]  :projectId name of the project
-# @option notify_options [String]  :title to display in the application and if enabled in the notification
-# @option notify_options [String]  :summary is a not so long text to display on the application and if enabled in the notification
-# @option notify_options [String]  :body it can contain a long text simple formatted, no html to display in the application
-# @option notify_options [Array]   :tags it can be used to categorize the notification, must be strings
-# @option notify_options [String]  :link it can be used to display on the application and if enabled in the notification
-# @option notify_options [Boolean] :push if True, a push notification is sent to application
-$EveryLogClient.notify(...)
+# @param [Hash] log_entry_options
+# @option log_entry_options [String, options[:projectId]]  :projectId name of the project
+# @option log_entry_options [String]  :title to display in the application and if enabled in the notification
+# @option log_entry_options [String]  :summary is a not so long text to display on the application and if enabled in the notification
+# @option log_entry_options [String]  :body it can contain a long text simple formatted, no html to display in the application
+# @option log_entry_options [Array]   :tags it can be used to categorize the notification, must be strings
+# @option log_entry_options [String]  :link it can be used to display on the application and if enabled in the notification
+# @option log_entry_options [Boolean] :push if True, a push notification is sent to application
+$everylog_client.create_log_entry(...)
 ```
 ## Contributing
 
