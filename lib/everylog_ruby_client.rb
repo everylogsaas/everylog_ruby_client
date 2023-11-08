@@ -22,7 +22,7 @@ class EverylogRubyClient
     push: false,
     icon: "",
     externalChannels: [],
-    properties: {},
+    properties: [{}],
     groups: [],
   }.freeze
 
@@ -48,6 +48,13 @@ class EverylogRubyClient
 
   def create_log_entry(log_entry_options = {})
     @log_entry_options = _parse_options(log_entry_options, LOG_ENTRY_DEFAULTS)
+
+    if @log_entry_options.key?(:properties)
+      unless @log_entry_options[:properties].is_a?(Array) && @log_entry_options[:properties].all? { |property| property.is_a?(Hash) }
+        raise ArgumentError, "Properties must be an array of objects (hashes)."
+      end
+    end
+    
     merged_options  = { projectId: options[:projectId] }.merge(@log_entry_options)
     uri             = URI(options[:everylog_url])
     http            = Net::HTTP.new(uri.host, uri.port)
