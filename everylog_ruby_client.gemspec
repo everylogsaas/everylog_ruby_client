@@ -5,7 +5,7 @@ require_relative "lib/everylog_ruby_client/version"
 Gem::Specification.new do |spec|
   spec.name = "everylog_ruby_client"
 
-  spec.version = EveryLogRubyClient::VERSION
+  spec.version = EverylogRubyClient::VERSION
 
   spec.homepage = "https://github.com/everylogsaas/everylog_ruby_client"
 
